@@ -1,0 +1,109 @@
+  var layer_poblacion_total_sexo_varon;
+  var info_poblacion_total_sexo_varon = L.control({ position: 'bottomleft' });
+  function zoomToFeature(e) {
+    map.fitBounds(e.target.getBounds());
+  }
+  info_poblacion_total_sexo_varon.onAdd = function (map) {
+    this._div = L.DomUtil.create('div', 'info'); // create a div with a class "info"
+    this.update();
+    return this._div;
+  };
+  info_poblacion_total_sexo_varon.update = function (props) {
+    this._div.innerHTML = '<h4>	Poblacion por sexo: Varon</h4>' +  (props ?
+        '<b>' + '</b><br />' + props.poblacion_total_sexo_varon + ' Personas'
+        : 'mover el mouse sobre el mapa');
+  };
+  function getColor_poblacion_total_sexo_varon(d) {
+    return d >     466    ? '#800026' :
+           d >     399    ? '#BD0026' :
+           d >     333    ? '#E31A1C' :
+           d >     266    ? '#FC4E2A' :
+           d >     200    ? '#FD8D3C' :
+           d >     133    ? '#FEB24C' :
+           d >      67    ? '#FED976' :
+                       '#FFEDA0' ;
+  }
+
+		var legend_poblacion_total_sexo_varon = L.control({position: 'topleft'});
+
+		legend_poblacion_total_sexo_varon.onAdd = function (map) {
+
+			var div = L.DomUtil.create('div', 'info legend'),
+				grades = [0,      67,     133,     200,     266,     333,     399,     466],
+				labels = [],
+				from, to;
+
+			for (var i = 0; i < grades.length; i++) {
+				from = grades[i];
+				to = grades[i + 1];
+
+				labels.push(
+					'<i style="background:' + getColor_poblacion_total_sexo_varon(from + 33.290668) + '"></i> ' +
+					from + (to ? '&ndash;' + to : '+'));
+			}
+
+			div.innerHTML = labels.join('<br>');
+			return div;
+		};
+
+
+
+  function highlightFeature_poblacion_total_sexo_varon(e) {
+    var layer = e.target;
+
+    layer.setStyle({
+        weight: 5,
+        opacity: 1,
+        color: 'black',
+        dashArray: '3',
+        fillOpacity: 0.7
+    });
+
+    if (!L.Browser.ie && !L.Browser.opera) {
+        layer.bringToFront();
+    }
+    info_poblacion_total_sexo_varon.addTo(map);
+    info_poblacion_total_sexo_varon.update(layer.feature.properties);
+    legend_poblacion_total_sexo_varon.addTo(map);
+  }
+  
+
+  function resetHighlight_poblacion_total_sexo_varon(e) {
+    var layer = e.target;
+
+    layer.setStyle({
+        weight: 1,
+        color: 'black',
+        dashArray: '',
+        fillOpacity: 0.7
+
+    });
+    info_poblacion_total_sexo_varon.removeFrom(map)
+    info_poblacion_total_sexo_varon.update();
+    legend_poblacion_total_sexo_varon.removeFrom(map);
+  }
+  
+  function onEachFeature_poblacion_total_sexo_varon(feature, layer) {
+    layer.on({
+        mouseover: highlightFeature_poblacion_total_sexo_varon,
+        mouseout: resetHighlight_poblacion_total_sexo_varon,
+        click: zoomToFeature
+    });
+  }
+
+
+  function style_poblacion_total_sexo_varon(feature) {
+      return {
+          fillColor: getColor_poblacion_total_sexo_varon(feature.properties.poblacion_total_sexo_varon),
+          weight: 1,
+          opacity: 1,
+          color: 'black',
+          dashArray: '',
+          fillOpacity: 0.7
+      };
+  }
+
+  layer_poblacion_total_sexo_varon =  L.geoJson(poligonos,{
+    style: style_poblacion_total_sexo_varon,
+    onEachFeature: onEachFeature_poblacion_total_sexo_varon
+  });

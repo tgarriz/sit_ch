@@ -1,0 +1,32 @@
+
+/*.unilogo img {width: 155px !Important; height: 36px;}*/
+
+.leaflet-popup-content { margin: 13px 0 13px 13px; max-height: 200px; min-height: 150px;}
+
+.poppy, .poppylarge {max-width: 200px;padding: 0 20px 0 0;}
+.poppy img {max-width:180px !important; float: none; margin: 0 0 10px 0;}
+
+.poppy2 {float: none; width: 100%;}
+
+iframe {width:188px; height: 120px;margin: 0 12px 0 0;}
+
+#help, .leaflet-label, .helpbutton {display: none;}
+
+.postcode {margin: 0 0 10px 0; width:}
+
+.poppylarge form { overflow:auto; padding:10px 15px 0 15px; margin: 0 0 10px 0;}
+
+.destination{clear:both;}
+
+.directions{clear:both;}
+
+.directions input{height:25px; margin: 15px 0 0 0;}
+
+.menu{width:65%;}
+
+
+
+
+
+
+

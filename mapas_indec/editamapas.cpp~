@@ -1,0 +1,149 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#define N 57
+void generajs(char var[100],char var2[100], char uni[100], float max, float min);
+
+
+int main(){
+	char var[100];
+	char var2[100];
+	char uni[100];
+	float max;
+	float min;
+	FILE *in=fopen("estadistica.dat","r");
+	for(int i=0;i<N;i++){
+	    fscanf(in,"%s  %f %f %s", var,&min,&max,uni);
+	    printf("%s  %f %f %s", var,min,max,uni);
+        fgets (var2 , 100 , in);
+        char *pos;
+        if ((pos=strchr(var2, '\n')) != NULL)
+        *pos = '\0';
+        printf("%s\n",var2);
+        getchar();
+        generajs(var,var2, uni,max,min);
+    }
+
+    return 1;
+}
+void generajs(char var[100],char var2[100], char uni[100], float max, float min){
+	char ar[100];
+	sprintf(ar,"%s.js",var);
+	FILE *file=fopen(ar,"w");
+
+    fprintf(file,"  var layer_%s;\n",var);
+    fprintf(file,"  var info_%s = L.control({ position: 'bottomleft' });\n",var);
+    fprintf(file,"  function zoomToFeature(e) {\n");
+    fprintf(file,"    map.fitBounds(e.target.getBounds());\n");
+    fprintf(file,"  }\n");
+    fprintf(file,"  info_%s.onAdd = function (map) {\n",var);
+    fprintf(file,"    this._div = L.DomUtil.create('div', 'info'); // create a div with a class \"info\"\n");
+    fprintf(file,"    this.update();\n");
+    fprintf(file,"    return this._div;\n");
+    fprintf(file,"  };\n");
+    fprintf(file,"  info_%s.update = function (props) {\n",var);
+    fprintf(file,"    this._div.innerHTML = '<h4>%s</h4>' +  (props ?\n",var2);
+    fprintf(file,"        '<b>' + '</b><br />' + props.%s + ' %s'\n",var,uni);
+    fprintf(file,"        : 'mover el mouse sobre el mapa');\n");
+    fprintf(file,"  };\n");
+
+
+    fprintf(file,"  function getColor_%s(d) {\n",var);
+    fprintf(file,"    return d > %7.0f    ? '#800026' :\n",7.0*(max-min)/8.0+min);
+    fprintf(file,"           d > %7.0f    ? '#BD0026' :\n",6.0*(max-min)/8.0+min);
+    fprintf(file,"           d > %7.0f    ? '#E31A1C' :\n",5.0*(max-min)/8.0+min);
+    fprintf(file,"           d > %7.0f    ? '#FC4E2A' :\n",4.0*(max-min)/8.0+min);
+    fprintf(file,"           d > %7.0f    ? '#FD8D3C' :\n",3.0*(max-min)/8.0+min);
+    fprintf(file,"           d > %7.0f    ? '#FEB24C' :\n",2.0*(max-min)/8.0+min);
+    fprintf(file,"           d > %7.0f    ? '#FED976' :\n",1.0*(max-min)/8.0+min);
+    fprintf(file,"                       '#FFEDA0' ;\n");
+    fprintf(file,"  }\n");
+    fprintf(file,"\n");
+    fprintf(file,"		var legend_%s = L.control({position: 'topleft'});\n",var);
+    fprintf(file,"\n");
+    fprintf(file,"		legend_%s.onAdd = function (map) {\n",var);
+    fprintf(file,"\n");
+    fprintf(file,"			var div = L.DomUtil.create('div', 'info legend'),\n");
+    fprintf(file,"				grades = [0, %7.0f, %7.0f, %7.0f, %7.0f, %7.0f, %7.0f, %7.0f],\n",1.0*(max-min)/8.0+min,2.0*(max-min)/8.0+min,3.0*(max-min)/8.0+min,4.0*(max-min)/8.0+min,5.0*(max-min)/8.0+min,6.0*(max-min)/8.0+min,7.0*(max-min)/8.0+min);
+    fprintf(file,"				labels = [],\n");
+    fprintf(file,"				from, to;\n");
+    fprintf(file,"\n");
+    fprintf(file,"			for (var i = 0; i < grades.length; i++) {\n");
+    fprintf(file,"				from = grades[i];\n");
+    fprintf(file,"				to = grades[i + 1];\n");
+    fprintf(file,"\n");
+    fprintf(file,"				labels.push(\n");
+    fprintf(file,"					'<i style=\"background:' + getColor_%s(from + %f) + '\"></i> ' +\n",var,0.5*(max-min)/8.0);
+    fprintf(file,"					from + (to ? '&ndash;' + to : '+'));\n");
+    fprintf(file,"			}\n");
+    fprintf(file,"\n");
+    fprintf(file,"			div.innerHTML = labels.join('<br>');\n");
+    fprintf(file,"			return div;\n");
+    fprintf(file,"		};\n");
+    fprintf(file,"\n");
+    fprintf(file,"\n");
+    fprintf(file,"\n");
+    fprintf(file,"  function highlightFeature_%s(e) {\n",var);
+    fprintf(file,"    var layer = e.target;\n");
+    fprintf(file,"\n");
+    fprintf(file,"    layer.setStyle({\n");
+    fprintf(file,"        weight: 5,\n");
+    fprintf(file,"        opacity: 1,\n");
+    fprintf(file,"        color: 'black',\n");
+    fprintf(file,"        dashArray: '3',\n");
+    fprintf(file,"        fillOpacity: 0.7\n");
+    fprintf(file,"    });\n");
+    fprintf(file,"\n");
+    fprintf(file,"    if (!L.Browser.ie && !L.Browser.opera) {\n");
+    fprintf(file,"        layer.bringToFront();\n");
+    fprintf(file,"    }\n");
+    fprintf(file,"    info_%s.addTo(map);\n",var);
+    fprintf(file,"    info_%s.update(layer.feature.properties);\n",var);
+    fprintf(file,"    legend_%s.addTo(map);\n",var);
+    fprintf(file,"  }\n");
+    fprintf(file,"  \n");
+    fprintf(file,"\n");
+    fprintf(file,"  function resetHighlight_%s(e) {\n",var);
+    fprintf(file,"    var layer = e.target;\n");
+    fprintf(file,"\n");
+    fprintf(file,"    layer.setStyle({\n");
+    fprintf(file,"        weight: 1,\n");
+    fprintf(file,"        color: 'black',\n");
+    fprintf(file,"        dashArray: '',\n");
+    fprintf(file,"        fillOpacity: 0.7\n");
+    fprintf(file,"\n");
+    fprintf(file,"    });\n");
+    fprintf(file,"    info_%s.removeFrom(map)\n",var);
+    fprintf(file,"    info_%s.update();\n",var);
+    fprintf(file,"    legend_%s.removeFrom(map);\n",var);
+    fprintf(file,"  }\n");
+    fprintf(file,"  \n");
+    fprintf(file,"  function onEachFeature_%s(feature, layer) {\n",var);
+    fprintf(file,"    layer.on({\n");
+    fprintf(file,"        mouseover: highlightFeature_%s,\n",var);
+    fprintf(file,"        mouseout: resetHighlight_%s,\n",var);
+    fprintf(file,"        click: zoomToFeature\n");
+    fprintf(file,"    });\n");
+    fprintf(file,"  }\n");
+    fprintf(file,"\n");
+    fprintf(file,"\n");
+    fprintf(file,"  function style_%s(feature) {\n",var);
+    fprintf(file,"      return {\n");
+    fprintf(file,"          fillColor: getColor_%s(feature.properties.densidad_poblacion),\n",var);
+    fprintf(file,"          weight: 1,\n");
+    fprintf(file,"          opacity: 1,\n");
+    fprintf(file,"          color: 'black',\n");
+    fprintf(file,"          dashArray: '',\n");
+    fprintf(file,"          fillOpacity: 0.7\n");
+    fprintf(file,"      };\n");
+    fprintf(file,"  }\n");
+    fprintf(file,"\n");
+    fprintf(file,"  layer_%s =  L.geoJson(poligonos,{\n",var);
+    fprintf(file,"    style: style_%s,\n",var);
+    fprintf(file,"    onEachFeature: onEachFeature_%s\n",var);
+    fprintf(file,"  });\n");
+
+    fclose(file);
+	return ;
+}
+

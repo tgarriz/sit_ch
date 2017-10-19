@@ -1,0 +1,72 @@
+  var layer_condicion_actividad_ocupado;
+  var info_condicion_actividad_ocupado = L.control({ position: 'bottomleft' });
+  function zoomToFeature(e) {
+    map.fitBounds(e.target.getBounds());
+  }
+  info_condicion_actividad_ocupado.onAdd = function (map) {
+    this._div = L.DomUtil.create('div', 'info');
+    this.update();
+    return this._div;
+  };
+  info_condicion_actividad_ocupado.update = function (props) {
+    this._div.innerHTML = '<h4>Condición de actividad	Ocupado</h4>' +  (props ?
+        '<b>' + '</b><br />' + props.condicion_actividad_ocupado + ' de ' + props.condicion_actividad_total + 'personas'
+        : 'mover el mouse sobre el mapa');
+  };
+  function highlightFeature_condicion_actividad_ocupado(e) {
+    var layer = e.target;
+    layer.setStyle({
+        weight: 5,
+        opacity: 1,
+        color: 'black',
+        dashArray: '3',
+        fillOpacity: 0.7
+    });
+    if (!L.Browser.ie && !L.Browser.opera) {
+        layer.bringToFront();
+    }
+    info_condicion_actividad_ocupado.addTo(map);
+    info_condicion_actividad_ocupado.update(layer.feature.properties);
+  }
+  function resetHighlight_condicion_actividad_ocupado(e) {
+    var layer = e.target;
+    layer.setStyle({
+        weight: 1,
+        color: 'black',
+        dashArray: '',
+        fillOpacity: 0.7
+    });
+    info_condicion_actividad_ocupado.removeFrom(map)
+    info_condicion_actividad_ocupado.update();
+  }
+  function onEachFeature_condicion_actividad_ocupado(feature, layer) {
+    layer.on({
+        mouseover: highlightFeature_condicion_actividad_ocupado,
+        mouseout: resetHighlight_condicion_actividad_ocupado,
+        click: zoomToFeature
+    });
+  }
+  function getColor_condicion_actividad_ocupado(d,d2) {
+    return d/d2 > 0.70   ? '#800026' :
+           d/d2 > 0.60   ? '#BD0026' :
+           d/d2 > 0.50   ? '#E31A1C' :
+           d/d2 > 0.40   ? '#FC4E2A' :
+           d/d2 > 0.30   ? '#FD8D3C' :
+           d/d2 > 0.20   ? '#FEB24C' :
+           d/d2 > 0.10   ? '#FED976' :
+                     '#FFEDA0';
+  }
+  function style_condicion_actividad_ocupado(feature) {
+      return {
+          fillColor: getColor_condicion_actividad_ocupado(feature.properties.condicion_actividad_ocupado,feature.properties.condicion_actividad_total),
+          weight: 1,
+          opacity: 1,
+          color: 'black',
+          dashArray: '',
+          fillOpacity: 0.7
+      };
+  }
+  layer_condicion_actividad_ocupado =  L.geoJson(poligonos,{
+    style: style_condicion_actividad_ocupado,
+    onEachFeature: onEachFeature_condicion_actividad_ocupado
+  });

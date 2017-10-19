@@ -1,0 +1,97 @@
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////    
+////////////////////////////////////////////SE DEFINE TODO PARA DENSIDAD////////////////////////////////////////////////////////  
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////    
+  var layer_densidad_poblacion;
+
+  var info_densidad = L.control();
+
+  function zoomToFeature(e) {
+    map.fitBounds(e.target.getBounds());
+  }
+
+  info_densidad.onAdd = function (map) {
+    this._div = L.DomUtil.create('div', 'info'); // create a div with a class "info"
+    this.update();
+    return this._div;
+  };
+
+// method that we will use to update the control based on feature properties passed
+  info_densidad.update = function (props) {
+    this._div.innerHTML = '<h4>Densidad de Poblacion</h4>' +  (props ?
+        '<b>' + '</b><br />' + props.densidad_poblacion + ' personas / km<sup>2</sup>'
+        : 'mover el mouse sobre el mapa');
+  };
+
+
+  function highlightFeature_densidad(e) {
+    var layer = e.target;
+
+    layer.setStyle({
+        weight: 5,
+        opacity: 1,
+        color: 'black',
+        dashArray: '3',
+        fillOpacity: 0.7
+    });
+
+    if (!L.Browser.ie && !L.Browser.opera) {
+        layer.bringToFront();
+    }
+    info_densidad.addTo(map);
+    info_densidad.update(layer.feature.properties);
+  }
+  
+
+  function resetHighlight_densidad(e) {
+    var layer = e.target;
+
+    layer.setStyle({
+        weight: 1,
+        color: 'black',
+        dashArray: '',
+        fillOpacity: 0.7
+
+    });
+    info_densidad.removeFrom(map)
+    info_densidad.update();
+  }
+  
+  
+  function onEachFeature_densidad(feature, layer) {
+    layer.on({
+        mouseover: highlightFeature_densidad,
+        mouseout: resetHighlight_densidad,
+        click: zoomToFeature
+    });
+  }
+
+  function getColor_dens(d) {
+    return d > 5000 ? '#800026' :
+           d > 2000  ? '#BD0026' :
+           d > 1000 ? '#E31A1C' :
+           d > 500  ? '#FC4E2A' :
+           d > 200  ? '#FD8D3C' :
+           d > 100  ? '#FEB24C' :
+           d > 1    ? '#FED976' :
+                      '#FFEDA0';
+  }
+
+  function style_dens(feature) {
+      return {
+          fillColor: getColor_dens(feature.properties.densidad_poblacion),
+          weight: 1,
+          opacity: 1,
+          color: 'black',
+          dashArray: '',
+          fillOpacity: 0.7
+      };
+  }
+
+
+  layer_densidad_poblacion =  L.geoJson(poligonos,{
+    style: style_dens,
+    onEachFeature: onEachFeature_densidad
+  });
+
+
+

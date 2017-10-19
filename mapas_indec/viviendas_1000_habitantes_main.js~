@@ -1,0 +1,96 @@
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////    
+////////////////////////////////////////////SE DEFINE TODO PARA viviendas cada 1000 habitantes//////////////////////////////////  
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////    
+  var layer_viviendas_1000_habitantes;
+
+  var info_viviendas_1000_habitantes = L.control();
+
+  function zoomToFeature(e) {
+    map.fitBounds(e.target.getBounds());
+  }
+
+  info_viviendas_1000_habitantes.onAdd = function (map) {
+    this._div = L.DomUtil.create('div', 'info'); // create a div with a class "info"
+    this.update();
+    return this._div;
+  };
+
+// method that we will use to update the control based on feature properties passed
+  info_viviendas_1000_habitantes.update = function (props) {
+    this._div.innerHTML = '<h4>Condicion de Actividad Desocupado</h4>' +  (props ?
+        '<b>' + '</b><br />' + props.viviendas_1000_habitantes + ' viviendas'
+        : 'mover el mouse sobre el mapa');
+  };
+
+
+  function highlightFeature_viviendas_1000_habitantes(e) {
+    var layer = e.target;
+
+    layer.setStyle({
+        weight: 5,
+        opacity: 1,
+        color: 'black',
+        dashArray: '3',
+        fillOpacity: 0.7
+    });
+
+    if (!L.Browser.ie && !L.Browser.opera) {
+        layer.bringToFront();
+    }
+    info_viviendas_1000_habitantes.addTo(map);
+    info_viviendas_1000_habitantes.update(layer.feature.properties);
+  }
+  
+
+  function resetHighlight_viviendas_1000_habitantes(e) {
+    var layer = e.target;
+
+    layer.setStyle({
+        weight: 1,
+        color: 'black',
+        dashArray: '',
+        fillOpacity: 0.7
+
+    });
+    info_viviendas_1000_habitantes.removeFrom(map)
+    info_viviendas_1000_habitantes.update();
+  }
+  
+  
+  function onEachFeature_viviendas_1000_habitantes(feature, layer) {
+    layer.on({
+        mouseover: highlightFeature_viviendas_1000_habitantes,
+        mouseout: resetHighlight_viviendas_1000_habitantes,
+        click: zoomToFeature
+    });
+  }
+
+  function getColor_viviendas_1000_habitantes(d) {
+    return d > 700   ? '#800026' :
+           d > 600   ? '#BD0026' :
+           d > 500   ? '#E31A1C' :
+           d > 400   ? '#FC4E2A' :
+           d > 300   ? '#FD8D3C' :
+           d > 200   ? '#FEB24C' :
+           d > 100   ? '#FED976' :
+                       '#FFEDA0';
+  }
+
+  function style_viviendas_1000_habitantes(feature) {
+      return {
+          fillColor: getColor_viviendas_1000_habitantes(feature.properties.viviendas_1000_habitantes),
+          weight: 1,
+          opacity: 1,
+          color: 'black',
+          dashArray: '',
+          fillOpacity: 0.7
+      };
+  }
+
+
+  layer_viviendas_1000_habitantes =  L.geoJson(poligonos,{
+    style: style_viviendas_1000_habitantes,
+    onEachFeature: onEachFeature_viviendas_1000_habitantes
+  });
+
+

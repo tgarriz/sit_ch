@@ -1,0 +1,338 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <!-- Force latest rendering mode in IE -->
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <title>Mapa y Puntos de Interés - Chascomús</title>
+    <meta name="description" content="Gis referenciado a la Ciudad de Chascomús" >
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" >
+    <meta name="keywords" content="Chascomus, Gis" >
+    <meta name="author" content="Juan Pablo Gárriz">
+
+    <link rel="stylesheet" type="text/css" href="css/map.css" />
+    <link rel="stylesheet" type="text/css" href="css/leaflet-search.css" />
+    <link rel="stylesheet" type="text/css" href="css/leaflet-measure.css" />
+    <link rel="stylesheet" type="text/css" href="css/leaflet.label.css" />
+    <link rel="stylesheet" type="text/css" href="css/Control.FullScreen.css" />
+    <link rel="stylesheet" type="text/css" href="css/Control.MiniMap.css" />
+    <link rel="stylesheet" type="text/css" href="css/plugins.css" />
+    <link type="text/css" rel="stylesheet" href="css/jquery.mmenu.css" />
+    <link type="text/css" rel="stylesheet" href="bower_components/leaflet.markercluster/dist/MarkerCluster.css" />
+    <link type="text/css" rel="stylesheet" href="bower_components/leaflet.markercluster/dist/MarkerCluster.Default.css" />
+    <link rel="stylesheet" type="text/css" href="css/mobile.css" media="only screen and (max-width: 581px)">
+    <!--[if lte IE 8]>
+    <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.6.4/leaflet.ie.css" />
+<![endif]-->
+      <script type="text/javascript" src="data/indec_radio.js"></script>
+      <script type="text/javascript" src="data/radio_indec.js"></script>
+      <script type="text/javascript" src="./data/barrios.js"></script>
+      <script type="text/javascript" src="./data/edif_muni.js"></script>
+      <script type="text/javascript" src="./data/sedes_muni.js"></script>
+      <script type="text/javascript" src="./data/clubes.js"></script>    
+      <script type="text/javascript" src="./data/escuelas.js"></script>    
+      <script type="text/javascript" src="./data/unsam.js"></script>    
+      <script type="text/javascript" src="./data/turismo.js"></script>    
+      <script type="text/javascript" src="./data/salud.js"></script>    
+      <script type="text/javascript" src="./data/cultura.js"></script>    
+      <script type="text/javascript" src="./data/sociedad.js"></script> 
+
+      <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.3/dist/leaflet.css" integrity="sha512-07I2e+7D8p6he1SIM+1twR5TIrhUQn9+I6yjqD53JQjFiMf8EtC93ty0/5vJTZGF8aAocvHYNEDJajGdNx1IsQ==" crossorigin="" />
+    <script src="https://unpkg.com/leaflet@1.0.3/dist/leaflet-src.js" integrity="sha512-WXoSHqw/t26DszhdMhOXOkI7qCiv5QWXhH9R7CgvgZMHz1ImlkVQ3uNsiQKu5wwbbxtPzFXd1hK4tzno2VqhpA==" crossorigin=""></script>
+
+    <script type="text/javascript" src="js/leaflet.browser.print.min.js"></script>
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="bower_components/leaflet.markercluster/dist/leaflet.markercluster-src.js"></script>
+    <script type="text/javascript" src="js/leaflet-search.js"></script>
+    <script type="text/javascript" src="js/Control.FullScreen.js"></script>
+    <script type="text/javascript" src="js/jquery.mmenu.js"></script>
+    <script type="text/javascript" src="js/leaflet-measure.js"></script>
+    <script type="text/javascript" src="js/popups.js"></script>
+    <script type="text/javascript" src="js/navigation.js"></script>
+    <script type="text/javascript" src="js/Control.MiniMap.js"></script>
+    <script type="text/javascript" src="js/navigation_barrios.js"></script>
+    <script type="text/javascript" src="js/navigation_cultura.js"></script>
+    <script type="text/javascript" src="js/navigation_salud.js"></script>
+    <script type="text/javascript" src="js/navigation_turismo.js"></script>
+    <script type="text/javascript" src="js/navigation_educacion.js"></script>
+    <script type="text/javascript" src="js/navigation_sociedad.js"></script>
+    <script type="text/javascript" src="js/navigation_indec.js"></script>
+    <script type="text/javascript" src="js/leaflet.label.js"></script>
+    <script type="text/javascript" src="js/L.Control.Locate.js"></script>
+    <script type="text/javascript" src="js/help.js"></script>
+    
+    <script type="text/javascript">
+        //////////GENERA MENU//////////
+        $(function () {
+            $('nav#menu').mmenu({
+                slidingSubmenus: false,
+                position: "right",
+                zposition: "front"
+            });
+        });
+
+
+    </script>
+</head>
+
+<body>
+    <script>
+        jQuery('body').addClass('js');
+    </script>
+    <div id="header">
+
+        <!--<a href="http://www.chascomus.gob.ar" class="unilogo"><img src="images/unilogo.png" title="Municipio de Chascomús" alt="Municipio de Chascomús" /></a>-->
+        <a href="#menu" class="menubutton button">Menu</a>
+        <a href="#" class="helpbutton showhide button">Ayuda</a>
+    </div>
+
+    <div id="content">
+        <nav id="menu">
+            <ul>
+                <li><a href="#mm-m0-p1" class="mm-subopen fix">INDEC</a>
+                    <ul id="mm-m0-p1">
+                        <li><a href="#" class="department1">Densidad de Población</a></li>
+                        <li><a href="#" class="department2">Población Total</a></li>
+                        <li><a href="#" class="department3">Población menor a 1 año</a></li>
+                        <li><a href="#" class="department4">Población 2 a 4 años</a></li>
+                        <li><a href="#" class="department5">Población de 5 a 12 años</a></li>
+                        <li><a href="#" class="department6">Población 13 a 17 años</a></li>
+                        <li><a href="#" class="department7">Población 18 a 24 años</a></li>
+                        <li><a href="#" class="department8">Población 25 a 64 años</a></li>
+                        <li><a href="#" class="department9">Población mas de 65 años</a></li>
+                        <li><a href="#" class="department10">Población mas de 80 años</a></li>
+                        <li><a href="#" class="department11">Edad Promedio</a></li>
+                        <li><a href="#" class="department12">Indice de Dependencia Potencial</a></li>
+                        <li><a href="#" class="department13">Desocupados</a></li>
+                        <li><a href="#" class="department14">Población Economicamente Activa</a></li>
+                        <li><a href="#" class="department15">Porcentaje Población con NBI</a></li>
+                        <li><a href="#" class="department16">Inmigrantes</a></li>
+                        <li><a href="#" class="department17">Porcentaje Hogares Unipersonales</a></li>
+                        <li><a href="#" class="department18">Porcentaje de hogares nucleares completos de pareja e hijos</a></li>
+                        <li><a href="#" class="department19">Porcentaje de hogares con jefatura femenina</a></li>
+                        <li><a href="#" class="department20">Porcentaje de hogares con hijos de 0 a 4 años</a></li>
+                        <li><a href="#" class="department21">Porcentaje de hogares con hijos menores de 18 años</a></li>
+                        <li><a href="#" class="department22">Indice de Analfabetismo</a></li>
+                        <li><a href="#" class="department23">Personas que no Utilizan Computadora</a></li>
+                        <li><a href="#" class="department24">Viviendas cada 1000 habitantes</a></li>
+                        <li><a href="#" class="department25">Hogares Totales</a></li>
+                        <li><a href="#" class="department26">Porcentaje Hogares con NBI</a></li>
+                        <li><a href="#" class="department27">Hogares con agua de red</a></li>
+                        <li><a href="#" class="department28">Hogares sin provisiÃ³n de agua dentro de la vivienda</a></li>
+                        <li><a href="#" class="department29">Hogares con cloacas</a></li>
+                        <li><a href="#" class="department30">Hogares con instalaciÃ³n sanitaria con descarga de agua</a></li>
+                        <li><a href="#" class="department31">Hogares con gas de red</a></li>
+                        <li><a href="#" class="department32">Hogares Sin Heladera</a></li>
+                        <li><a href="#" class="department33">Hogares que No Utilizan Computador</a></li>
+                        <li><a href="#" class="department34">Hogares que No Poseen Telefono Celular</a></li>
+                        <li><a href="#" class="department35">Hogares que No Poseen Telefono de linea</a></li>
+                        <li><a href="#" class="department36">Mapa Sin Datos</a></li>
+                    </ul>
+                </li>
+                <li><a href="#mm-m0-p8" class="mm-subopen fix"><img src="./iconos/0-a.png" style="width:20px;height:20px;">&nbsp;EDUCACION</a>
+                    <ul id="mm-m0-p8">
+                        <li><a href="#" class="educacion1"><img src="./iconos/1-a.png" style="width:20px;height:20px;">&nbsp;Jardines</a></li>
+                        <li><a href="#" class="educacion2"><img src="./iconos/2-a.png" style="width:20px;height:20px;">&nbsp;Escuelas Primarias</a></li>
+                        <li><a href="#" class="educacion3"><img src="./iconos/3-a.png" style="width:20px;height:20px;">&nbsp;Escuelas Secundarias</a></li>
+                        <li><a href="#" class="educacion4"><img src="./iconos/4-a.png" style="width:20px;height:20px;">&nbsp;Educacion Superior</a></li>
+						<li><a href="#" class="educacion5"><img src="./iconos/5-a.png" style="width:20px;height:20px;">&nbsp;Educacion Especial</a></li>
+                        <li><a href="#" class="educacion6"><img src="./iconos/6-a.png" style="width:20px;height:20px;">&nbsp;Escuelas Adultos</a></li>
+						<li><a href="#" class="educacion7"><img src="./iconos/7-a.png" style="width:20px;height:20px;">&nbsp;Educacion Complementaria</a></li>
+                        <li><a href="#" class="educacion8"><img src="./iconos/8-a.png" style="width:20px;height:20px;">&nbsp;Otros</a></li>
+                    </ul>
+                </li>
+
+                <li><a href="#mm-m0-p10" class="mm-subopen fix"><img src="./iconos/0-n.png" alt="Mountain View" style="width:20px;height:20px;">&nbsp;SOCIEDAD</a>
+                    <ul id="mm-m0-p10">
+                        <li><a href="#" class="sociedad1"><img src="./iconos/1-n.png" alt="Mountain View" style="width:20px;height:20px;">&nbsp;Clubes</a></li>
+                        <li><a href="#" class="sociedad2"><img src="./iconos/2-n.png" alt="Mountain View" style="width:20px;height:20px;">&nbsp;Asociaciones Vecinales</a></li>
+                        <li><a href="#" class="sociedad3"><img src="./iconos/3-n.png" alt="Mountain View" style="width:20px;height:20px;">&nbsp;Sociedades de Fomento</a></li>
+                        <li><a href="#" class="sociedad4"><img src="./iconos/4-n.png" alt="Mountain View" style="width:20px;height:20px;">&nbsp;Sindicatos</a></li>
+                        <li><a href="#" class="sociedad5"><img src="./iconos/5-n.png" alt="Mountain View" style="width:20px;height:20px;">&nbsp;Camaras Empresariales</a></li>
+                        <li><a href="#" class="sociedad6"><img src="./iconos/6-n.png" alt="Mountain View" style="width:20px;height:20px;">&nbsp;ONGs</a></li>
+                        <li><a href="#" class="sociedad7"><img src="./iconos/7-n.png" alt="Mountain View" style="width:20px;height:20px;">&nbsp;Centro de Jubilados</a></li>
+                    </ul>
+                </li>
+                <li><a href="#mm-m0-p7" class="mm-subopen fix"><img src="./iconos/0-r.png" style="width:20px;height:20px;">&nbsp;SALUD</a>
+                    <ul id="mm-m0-p7">
+                        <li><a href="#" class="salud1"><img src="./iconos/1-r.png" style="width:20px;height:20px;">&nbsp;Farmacias</a></li>
+                        <li><a href="#" class="salud2"><img src="./iconos/2-r.png" style="width:20px;height:20px;">&nbsp;Centros de Atencion Primaria</a></li>
+                        <li><a href="#" class="salud3"><img src="./iconos/3-r.png" style="width:20px;height:20px;">&nbsp;Hogar de Ancianos</a></li>
+                        <li><a href="#" class="salud4"><img src="./iconos/4-r.png" style="width:20px;height:20px;">&nbsp;Hospital Municipal</a></li>
+                        <li><a href="#" class="salud5"><img src="./iconos/5-r.png" style="width:20px;height:20px;">&nbsp;Clínica Privada</a></li>
+                    </ul>
+                </li>
+                <li><a href="#mm-m0-p2" class="mm-subopen fix"><img src="./iconos/0-v.png" style="width:20px;height:20px;">&nbsp;TURISMO</a>
+                    <ul id="mm-m0-p2">
+                        <li><a href="#" class="turismo1"><img src="./iconos/1-v.png" style="width:20px;height:20px;">&nbsp;Transportes</a></li>
+                        <li><a href="#" class="turismo2"><img src="./iconos/2-v.png" style="width:20px;height:20px;">&nbsp;Bares y Confiterias</a></li>
+                        <li><a href="#" class="turismo3"><img src="./iconos/3-v.png" style="width:20px;height:20px;">&nbsp;Balnearios y Paradores</a></li>
+                        <li><a href="#" class="turismo4"><img src="./iconos/4-v.png" style="width:20px;height:20px;">&nbsp;Artesanias y Art.Regionales</a></li>
+                        <li><a href="#" class="turismo5"><img src="./iconos/5-v.png" style="width:20px;height:20px;">&nbsp;Cabanas y Apart</a></li>
+                        <li><a href="#" class="turismo6"><img src="./iconos/6-v.png" style="width:20px;height:20px;">&nbsp;Hoteles y Hosterias</a></li>
+                    </ul>
+                </li>
+
+                <li><a href="#mm-m0-p9" class="mm-subopen fix"><img src="./iconos/0-c.png" style="width:20px;height:20px;">&nbsp;CULTURA</a>
+                    <ul id="mm-m0-p9">
+                        <li><a href="#" class="cultura1"><img src="./iconos/1-c.png" style="width:20px;height:20px;">&nbsp;Bibliotecas</a></li>
+                        <li><a href="#" class="cultura2"><img src="./iconos/2-c.png" style="width:20px;height:20px;">&nbsp;Museos</a></li>
+                        <li><a href="#" class="cultura3"><img src="./iconos/3-c.png" style="width:20px;height:20px;">&nbsp;Centros Culturales</a></li>
+                        <li><a href="#" class="cultura4"><img src="./iconos/4-c.png" style="width:20px;height:20px;">&nbsp;Instituciones Religiosas</a></li>
+                        <li><a href="#" class="cultura5"><img src="./iconos/5-c.png" style="width:20px;height:20px;">&nbsp;ONGs</a></li>
+                        <li><a href="#" class="cultura6"><img src="./iconos/6-c.png" style="width:20px;height:20px;">&nbsp;Medios de Comunicacion</a></li>
+                    </ul>
+                </li>
+
+                <li><a href="#mm-m0-p3" class="mm-subopen fix">MUNICIPIO</a>
+                    <ul id="mm-m0-p3">
+                        <li><a href="#" class="muni1">Barrios</a></li>
+                        <li><a href="#" class="muni2">Dependencias Municipales</a></li>
+                        <li><a href="#" class="muni3">Edificios Municipales</a></li>
+                    </ul>
+                </li>
+                <!--<li><a href="#mm-m0-p5" class="mm-subopen fix">Puntos de Interes2</a>
+                    <ul id="mm-m0-p5">
+                        <li><img src="images/markers/bus-outline.png" width="15" height="15" alt="Bus station marker"> <a href="#" class="city1">St. Margaret's Bus Station</a></li>
+                        <li><img src="images/markers/train-outline.png" width="15" height="15" alt="Train station marker"> <a href="#" class="city2">Leicester Train Station</a></li>
+                        <li> <img src="images/markers/information.png" width="15" height="15" alt="Tourist information centre marker"><a href="#" class="city3">Tourist Information Centre</a></li>
+                        <li><img src="images/markers/shopping.png" width="15" height="15" alt="Shopping marker"> <a href="#" class="city4">Haymarket Shopping Centre</a></li>
+                        <li><img src="images/markers/shopping.png" width="15" height="15" alt="Shopping marker"> <a href="#" class="city5">Highcross Shopping Centre</a></li>
+                        <li><img src="images/markers/theatre.png" width="15" height="15" alt="Theatre marker"> <a href="#" class="city6">Curve Theatre</a></li>
+                        <li><img src="images/markers/theatre.png" width="15" height="15" alt="Theatre marker"> <a href="#" class="city7">Little Theatre</a></li>
+                        <li><img src="images/markers/museum.png" width="15" height="15" alt="Museum marker"> <a href="#" class="city8">Guild Hall Museum</a></li>
+                        <li><img src="images/markers/museum.png" width="15" height="15" alt="Museum marker"> <a href="#" class="city9">Newarke Houses Museum</a></li>
+                        <li><img src="images/markers/museum.png" width="15" height="15" alt="Museum marker"> <a href="#" class="city10">Jewry Wall Museum</a></li>
+                        <li><img src="images/markers/museum.png" width="15" height="15" alt="Museum marker"> <a href="#" class="city11">New Walk Museum</a></li>
+                        <li><img src="images/markers/cinema.png" width="15" height="15" alt="Cinema marker"> <a href="#" class="city12">Showcase Cinema</a></li>
+                        <li><img src="images/markers/cinema.png" width="15" height="15" alt="Cinema marker"> <a href="#" class="city13">Odeon Cinema</a></li>
+                    </ul>
+                </li>
+
+                <li><a href="#" class="parking1 fix">Parking Locations</a></li>
+                <li><a href="#" class="defib fix">Defibrillator Locations</a></li>
+                <li><a href="#mm-m0-p6" class="mm-subopen fix">Imprime mapas</a>
+                    <ul id="mm-m0-p6">
+                        <li><a href="documents/uol.pdf" target="_blank">University of Leicester map</a></li>
+                        <li><a href="documents/leicester-fc.pdf" target="_blank">Leicester City FC themed campus map</a></li>
+                        <li><a href="documents/halls.pdf" target="_blank">Map of Oadby student village</a></li>
+                        <li><a href="documents/citycentre.pdf" target="_blank">Map of Leicester city centre</a></li>
+                        <li><a href="documents/leicester.pdf" target="_blank">Map of Leicester</a></li>
+                        <li><a href="documents/parking.pdf" target="_blank">Car park locations</a></li>
+                        <li><a href="documents/brookfield.pdf" target="_blank">Walking directions to Brookfield</a></li>
+                    </ul>
+                </li>
+                <li class="colour fix"><a href="https://maps.google.co.uk/?ll=52.62166,-1.124521&amp;spn=0.006845,0.016512&amp;t=m&amp;z=17&amp;layer=c&amp;cbll=52.621616,-1.124443&amp;panoid=InNDLSqiMbgAAAQD3bFDmw&amp;cbp=12,176.43,,0,3.8" target="_blank">Explore the campus in Google street view</a></li>
+                <li class="colour fix"><a href="http://www.disabledgo.com/organisations/university-of-leicester/main" target="_blank">Disabled access information</a></li>-->
+                <li class="menu"><a href="#" id="refresh">Reset Map!</a></li>
+                <li class="menu bottom"><a href="#" target="_blank">Sugerencias</a></li>
+            </ul>
+
+        </nav>
+        <div id="map">
+
+        </div>
+    </div>
+    <div class='custom-popup' id='idmap'></div>
+    <div id="help">
+        <a title="Close"><img src="images/close.png" width="30" height="30" alt="Close"></a>
+        <h1>Como usar este mapa</h1>
+        <img src="images/menu.png" alt="boton menu" class="example">
+        <p>Click en el boton superior derecho para mostrar los layers a cargar</p>
+        <img src="images/help.png" alt="boton ayuda" class="example">
+        <p>Click en el boton de ayuda para observar la misma</p>
+        <img src="iconos/0-a.png" alt="icono" class="example">
+        <p>Click en los marcadores para obtener info</p>
+        <h2 style="text-align:center;">Links de Interés</h2>
+        <ul>
+            <li><a href="#" class="directions1 showhide">link1</a></li>
+            <li><a href="#" class="directions2 showhide">link2</a></li>
+            <li><a href="#" class="directions3 showhide">link3</a></li>
+            <li><a href="#" class="directions4 showhide">link4</a></li>
+        </ul>
+    </div>
+
+
+    <script>
+        var map = new L.Map('map', {
+            maxBounds: [
+            //south west
+                [-35.70,-57.8],
+            //north east
+                [-35.3,-58.1]
+            ],
+            //center: [-35.56757,-58.01012],
+            zoom: 11,
+            fullscreenControl: true,
+            fullscreenControlOptions: {
+                position: 'topleft'
+            },
+            attributionControl: false
+        }).setView([-35.57476,-58.00226], 12);
+
+        var measureControl = new L.Control.Measure({ 
+            position: 'topleft',
+            primaryLengthUnit: 'meters', 
+            secondaryLengthUnit: 'kilometers',
+            primaryAreaUnit: 'acres', 
+            secondaryAreaUnit: 'hectares',
+            localization: 'es',
+            activeColor: '#FF0000',
+            completedColor: '#FF0000'
+        });
+        measureControl.addTo(map);
+
+        base = new L.TileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {minZoom: 5});
+        /*var base = new L.TileLayer('https://api.mapbox.com/styles/v1/dw75/ciqkqnps4002tccnlj57d4lvp/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiZHc3NSIsImEiOiJjaXFrcWxkY3owMDFsaXdtMjlzazh4NTNuIn0.i0d5G72rExWTGIamu9HsMw', {
+                minZoom: 5 
+            }
+        );*/
+        mini_base = new L.TileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png');
+        base.addTo(map);
+        //Agregado Minimap
+        /*new L.Control.MiniMap(base,{toggleDisplay:true,
+                                    centerFixed: true}
+        ).addTo(map);*/
+        //Custersmarks
+        var markers = L.markerClusterGroup();
+        map.addLayer(markers);
+        //Printmapp
+        L.browserPrint().addTo(map);
+
+        // add the search bar to the map
+        var searchControl = new L.Control.Search({
+            position:'topleft',    // where do you want the search bar?
+            layer: markers,  // name of the layer
+            //initial: false,
+            zoom: 16,        // set zoom to found location when searched
+            textErr: 'Elemento no encontrado',
+            marker: {circle: {
+                radius: 20,
+                color: '#0a0',
+                opacity: 1
+            }},
+                        propertyName: 'nombre',
+            textPlaceholder: 'busca por nombre...',
+
+            
+        });
+
+        // add it to the map
+        map.addControl(searchControl);
+
+        //Scale legend
+        L.control.scale({imperial: false}).addTo(map);
+
+        // add geolocation on/off button
+        L.control.locate().addTo(map);
+
+        $('#refresh').click(function () {
+            location.reload();
+        });
+    
+        jQuery('body').removeClass('js');
+    </script>
+</body>
+
+</html>

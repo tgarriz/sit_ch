@@ -1,0 +1,43 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+ "marker-color": "#7e7e7e",
+        "marker-size": "medium",
+        "marker-symbol": "alcohol-shop",
+        "Name": "Abel Garriz",
+        "Ocupation": "Boludea con programitas",
+        "web":"google.com"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -58.06936,
+          -35.582282
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "marker-color": "#e71717",
+        "marker-size": "medium",
+        "marker-symbol": "shop",
+        "Name": "Nicolas Bontti",
+        "Ocupation": "se hace el rodete",
+        "web": "<a href=\"http://www.google.com\" target=\"_blank\" title=\"Opens in a new window\">pagina careta del bicho</a> y aca se pueden seguir escribiendo boludeces",
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -58.015136,
+          -35.577678
+        ]
+      }
+    }
+  ]
+}
+
+

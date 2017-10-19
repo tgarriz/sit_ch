@@ -1,0 +1,96 @@
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////    
+////////////////////////////////////////////SE DEFINE TODO PARA Poblacion con NBI/////////////////////////////////////////////////  
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////    
+  var layer_poblacion_NBI;
+
+  var info_poblacion_NBI = L.control();
+
+  function zoomToFeature(e) {
+    map.fitBounds(e.target.getBounds());
+  }
+
+  info_poblacion_NBI.onAdd = function (map) {
+    this._div = L.DomUtil.create('div', 'info'); // create a div with a class "info"
+    this.update();
+    return this._div;
+  };
+
+// method that we will use to update the control based on feature properties passed
+  info_poblacion_NBI.update = function (props) {
+    this._div.innerHTML = '<h4>Poblacion con NBI</h4>' +  (props ?
+        '<b>' + '</b><br />' + props.porcentaje_poblacion_NBI + ' %'
+        : 'mover el mouse sobre el mapa');
+  };
+
+
+  function highlightFeature_poblacion_NBI(e) {
+    var layer = e.target;
+
+    layer.setStyle({
+        weight: 5,
+        opacity: 1,
+        color: 'black',
+        dashArray: '3',
+        fillOpacity: 0.7
+    });
+
+    if (!L.Browser.ie && !L.Browser.opera) {
+        layer.bringToFront();
+    }
+    info_poblacion_NBI.addTo(map);
+    info_poblacion_NBI.update(layer.feature.properties);
+  }
+  
+
+  function resetHighlight_poblacion_NBI(e) {
+    var layer = e.target;
+
+    layer.setStyle({
+        weight: 1,
+        color: 'black',
+        dashArray: '',
+        fillOpacity: 0.7
+
+    });
+    info_poblacion_NBI.removeFrom(map)
+    info_poblacion_NBI.update();
+  }
+  
+  
+  function onEachFeature_poblacion_NBI(feature, layer) {
+    layer.on({
+        mouseover: highlightFeature_poblacion_NBI,
+        mouseout: resetHighlight_poblacion_NBI,
+        click: zoomToFeature
+    });
+  }
+
+  function getColor_poblacion_NBI(d) {
+    return d > 21   ? '#800026' :
+           d > 18   ? '#BD0026' :
+           d > 15   ? '#E31A1C' :
+           d > 12   ? '#FC4E2A' :
+           d > 9    ? '#FD8D3C' :
+           d > 6    ? '#FEB24C' :
+           d > 3    ? '#FED976' :
+                      '#FFEDA0';
+  }
+
+  function style_poblacion_NBI(feature) {
+      return {
+          fillColor: getColor_poblacion_NBI(feature.properties.porcentaje_poblacion_NBI),
+          weight: 1,
+          opacity: 1,
+          color: 'black',
+          dashArray: '',
+          fillOpacity: 0.7
+      };
+  }
+
+
+  layer_poblacion_NBI =  L.geoJson(poligonos,{
+    style: style_poblacion_NBI,
+    onEachFeature: onEachFeature_poblacion_NBI
+  });
+
+
