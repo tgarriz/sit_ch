@@ -30,13 +30,13 @@
       <script type="text/javascript" src="./data/barrios.js"></script>
       <script type="text/javascript" src="./data/edif_muni.js"></script>
       <script type="text/javascript" src="./data/sedes_muni.js"></script>
-      <script type="text/javascript" src="./data/clubes.js"></script>    
-      <script type="text/javascript" src="./data/escuelas.js"></script>    
-      <script type="text/javascript" src="./data/unsam.js"></script>    
-      <script type="text/javascript" src="./data/turismo.js"></script>    
-      <script type="text/javascript" src="./data/salud.js"></script>    
-      <script type="text/javascript" src="./data/cultura.js"></script>    
-      <script type="text/javascript" src="./data/sociedad.js"></script> 
+      <script type="text/javascript" src="./data/clubes.js"></script>
+      <script type="text/javascript" src="./data/escuelas.js"></script>
+      <script type="text/javascript" src="./data/unsam.js"></script>
+      <script type="text/javascript" src="./data/turismo.js"></script>
+      <script type="text/javascript" src="./data/salud.js"></script>
+      <script type="text/javascript" src="./data/cultura.js"></script>
+      <script type="text/javascript" src="./data/sociedad.js"></script>
 
       <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.3/dist/leaflet.css" integrity="sha512-07I2e+7D8p6he1SIM+1twR5TIrhUQn9+I6yjqD53JQjFiMf8EtC93ty0/5vJTZGF8aAocvHYNEDJajGdNx1IsQ==" crossorigin="" />
     <script src="https://unpkg.com/leaflet@1.0.3/dist/leaflet-src.js" integrity="sha512-WXoSHqw/t26DszhdMhOXOkI7qCiv5QWXhH9R7CgvgZMHz1ImlkVQ3uNsiQKu5wwbbxtPzFXd1hK4tzno2VqhpA==" crossorigin=""></script>
@@ -61,7 +61,7 @@
     <script type="text/javascript" src="js/leaflet.label.js"></script>
     <script type="text/javascript" src="js/L.Control.Locate.js"></script>
     <script type="text/javascript" src="js/help.js"></script>
-    
+
     <script type="text/javascript">
         //////////GENERA MENU//////////
         $(function () {
@@ -271,11 +271,11 @@
             attributionControl: false
         }).setView([-35.57476,-58.00226], 12);
 
-        var measureControl = new L.Control.Measure({ 
+        var measureControl = new L.Control.Measure({
             position: 'topleft',
-            primaryLengthUnit: 'meters', 
+            primaryLengthUnit: 'meters',
             secondaryLengthUnit: 'kilometers',
-            primaryAreaUnit: 'acres', 
+            primaryAreaUnit: 'acres',
             secondaryAreaUnit: 'hectares',
             localization: 'es',
             activeColor: '#FF0000',
@@ -285,7 +285,7 @@
 
         base = new L.TileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {minZoom: 5});
         /*var base = new L.TileLayer('https://api.mapbox.com/styles/v1/dw75/ciqkqnps4002tccnlj57d4lvp/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiZHc3NSIsImEiOiJjaXFrcWxkY3owMDFsaXdtMjlzazh4NTNuIn0.i0d5G72rExWTGIamu9HsMw', {
-                minZoom: 5 
+                minZoom: 5
             }
         );*/
         mini_base = new L.TileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png');
@@ -302,7 +302,7 @@
 
         // add the search bar to the map
         var searchControl = new L.Control.Search({
-            position:'topleft',    // where do you want the search bar?
+            position:'topright',    // where do you want the search bar?
             layer: markers,  // name of the layer
             //initial: false,
             zoom: 16,        // set zoom to found location when searched
@@ -315,7 +315,7 @@
                         propertyName: 'nombre',
             textPlaceholder: 'busca por nombre...',
 
-            
+
         });
 
         // add it to the map
@@ -330,7 +330,7 @@
         $('#refresh').click(function () {
             location.reload();
         });
-    
+
         jQuery('body').removeClass('js');
     </script>
 </body>
