@@ -42,6 +42,7 @@
     <script src="https://unpkg.com/leaflet@1.0.3/dist/leaflet-src.js" integrity="sha512-WXoSHqw/t26DszhdMhOXOkI7qCiv5QWXhH9R7CgvgZMHz1ImlkVQ3uNsiQKu5wwbbxtPzFXd1hK4tzno2VqhpA==" crossorigin=""></script>
 
     <script type="text/javascript" src="js/leaflet.browser.print.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-ajax/2.1.0/leaflet.ajax.min.js"></script>
     <script type="text/javascript" src="js/jquery.min.js"></script>
     <script type="text/javascript" src="bower_components/leaflet.markercluster/dist/leaflet.markercluster-src.js"></script>
     <script type="text/javascript" src="js/leaflet-search.js"></script>
@@ -90,7 +91,7 @@
     <div id="content">
         <nav id="menu">
             <ul>
-                <li><a href="#mm-m0-p1" class="mm-subopen fix"><img src="./iconos/indec.png" style="width:30px;height:20px;">&nbsp;INDEC</a>
+                <li><a href="#mm-m0-p1" class="mm-subopen fix"><img src="./iconos/icono_indec.png" style="width:30px;height:20px;">&nbsp;<img src="./iconos/indec.png" style="width:70px;height:30px;"></a>
                     <ul id="mm-m0-p1">
                         <li><a href="#" class="department1">Densidad de Población</a></li>
                         <li><a href="#" class="department2">Población Total</a></li>
@@ -128,6 +129,13 @@
                         <li><a href="#" class="department34">Hogares que No Poseen Telefono Celular</a></li>
                         <li><a href="#" class="department35">Hogares que No Poseen Telefono de linea</a></li>
                         <li><a href="#" class="department36">Mapa Sin Datos</a></li>
+                    </ul>
+                </li>
+                <li><a href="#mm-m0-p3" class="mm-subopen fix"><img src="./iconos/partido.png" style="width:30px;height:20px;">&nbsp;MUNICIPIO</a>
+                    <ul id="mm-m0-p3">
+                        <li><a href="#" class="muni1">Barrios</a></li>
+                        <li><a href="#" class="muni2">Dependencias Municipales</a></li>
+                        <li><a href="#" class="muni3">Edificios Municipales</a></li>
                     </ul>
                 </li>
                 <li><a href="#mm-m0-p8" class="mm-subopen fix"><img src="./iconos/0-a.png" style="width:20px;height:20px;">&nbsp;EDUCACION</a>
@@ -184,48 +192,7 @@
                         <li><a href="#" class="cultura6"><img src="./iconos/6-c.png" style="width:20px;height:20px;">&nbsp;Medios de Comunicacion</a></li>
                     </ul>
                 </li>
-
-                <li><a href="#mm-m0-p3" class="mm-subopen fix"><img src="./iconos/partido.png" style="width:30px;height:20px;">&nbsp;MUNICIPIO</a>
-                    <ul id="mm-m0-p3">
-                        <li><a href="#" class="muni1">Barrios</a></li>
-                        <li><a href="#" class="muni2">Dependencias Municipales</a></li>
-                        <li><a href="#" class="muni3">Edificios Municipales</a></li>
-                    </ul>
-                </li>
-                <!--<li><a href="#mm-m0-p5" class="mm-subopen fix">Puntos de Interes2</a>
-                    <ul id="mm-m0-p5">
-                        <li><img src="images/markers/bus-outline.png" width="15" height="15" alt="Bus station marker"> <a href="#" class="city1">St. Margaret's Bus Station</a></li>
-                        <li><img src="images/markers/train-outline.png" width="15" height="15" alt="Train station marker"> <a href="#" class="city2">Leicester Train Station</a></li>
-                        <li> <img src="images/markers/information.png" width="15" height="15" alt="Tourist information centre marker"><a href="#" class="city3">Tourist Information Centre</a></li>
-                        <li><img src="images/markers/shopping.png" width="15" height="15" alt="Shopping marker"> <a href="#" class="city4">Haymarket Shopping Centre</a></li>
-                        <li><img src="images/markers/shopping.png" width="15" height="15" alt="Shopping marker"> <a href="#" class="city5">Highcross Shopping Centre</a></li>
-                        <li><img src="images/markers/theatre.png" width="15" height="15" alt="Theatre marker"> <a href="#" class="city6">Curve Theatre</a></li>
-                        <li><img src="images/markers/theatre.png" width="15" height="15" alt="Theatre marker"> <a href="#" class="city7">Little Theatre</a></li>
-                        <li><img src="images/markers/museum.png" width="15" height="15" alt="Museum marker"> <a href="#" class="city8">Guild Hall Museum</a></li>
-                        <li><img src="images/markers/museum.png" width="15" height="15" alt="Museum marker"> <a href="#" class="city9">Newarke Houses Museum</a></li>
-                        <li><img src="images/markers/museum.png" width="15" height="15" alt="Museum marker"> <a href="#" class="city10">Jewry Wall Museum</a></li>
-                        <li><img src="images/markers/museum.png" width="15" height="15" alt="Museum marker"> <a href="#" class="city11">New Walk Museum</a></li>
-                        <li><img src="images/markers/cinema.png" width="15" height="15" alt="Cinema marker"> <a href="#" class="city12">Showcase Cinema</a></li>
-                        <li><img src="images/markers/cinema.png" width="15" height="15" alt="Cinema marker"> <a href="#" class="city13">Odeon Cinema</a></li>
-                    </ul>
-                </li>
-
-                <li><a href="#" class="parking1 fix">Parking Locations</a></li>
-                <li><a href="#" class="defib fix">Defibrillator Locations</a></li>
-                <li><a href="#mm-m0-p6" class="mm-subopen fix">Imprime mapas</a>
-                    <ul id="mm-m0-p6">
-                        <li><a href="documents/uol.pdf" target="_blank">University of Leicester map</a></li>
-                        <li><a href="documents/leicester-fc.pdf" target="_blank">Leicester City FC themed campus map</a></li>
-                        <li><a href="documents/halls.pdf" target="_blank">Map of Oadby student village</a></li>
-                        <li><a href="documents/citycentre.pdf" target="_blank">Map of Leicester city centre</a></li>
-                        <li><a href="documents/leicester.pdf" target="_blank">Map of Leicester</a></li>
-                        <li><a href="documents/parking.pdf" target="_blank">Car park locations</a></li>
-                        <li><a href="documents/brookfield.pdf" target="_blank">Walking directions to Brookfield</a></li>
-                    </ul>
-                </li>
-                <li class="colour fix"><a href="https://maps.google.co.uk/?ll=52.62166,-1.124521&amp;spn=0.006845,0.016512&amp;t=m&amp;z=17&amp;layer=c&amp;cbll=52.621616,-1.124443&amp;panoid=InNDLSqiMbgAAAQD3bFDmw&amp;cbp=12,176.43,,0,3.8" target="_blank">Explore the campus in Google street view</a></li>
-                <li class="colour fix"><a href="http://www.disabledgo.com/organisations/university-of-leicester/main" target="_blank">Disabled access information</a></li>-->
-                <li class="menu"><a href="#" id="refresh">Reset Map!</a></li>
+                <li class="menu"><a href="#" id="refresh">Reiniciar Mapa!</a></li>
                 <li class="menu bottom"><a href="#" target="_blank">Sugerencias</a></li>
             </ul>
 
@@ -288,8 +255,10 @@
                 minZoom: 5
             }
         );*/
+        part_base = new L.GeoJSON.AJAX("data/partido.geojson");
         mini_base = new L.TileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png');
         base.addTo(map);
+        part_base.addTo(map);
         //Agregado Minimap
         /*new L.Control.MiniMap(base,{toggleDisplay:true,
                                     centerFixed: true}
@@ -312,7 +281,7 @@
                 color: '#0a0',
                 opacity: 1
             }},
-                        propertyName: 'nombre',
+            propertyName: 'nombre',
             textPlaceholder: 'busca por nombre...',
 
 
