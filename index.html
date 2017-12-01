@@ -255,10 +255,19 @@
                 minZoom: 5
             }
         );*/
-        part_base = new L.GeoJSON.AJAX("data/partido.geojson");
+        var layerWms = L.tileLayer.wms(
+          'http://geobasig.com.ar/geoserver29/Geodesia/wms?',
+          {
+            layers: 'Geodesia:Provincia',
+            format: 'image/png',
+            transparent: true,
+            zIndex: 10,
+            cql_filter: 'partido = 27'
+          }
+        );
         mini_base = new L.TileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png');
         base.addTo(map);
-        part_base.addTo(map);
+        layerWms.addTo(map);
         //Agregado Minimap
         /*new L.Control.MiniMap(base,{toggleDisplay:true,
                                     centerFixed: true}
