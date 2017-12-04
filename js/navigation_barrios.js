@@ -63,7 +63,7 @@ function onEachFeatureMuni(feature, layer) {
                    };
         },
           onEachFeature: onEachFeatureMuni,
-        }).addTo(map);
+        }).addTo(markers);
         cargado3 = true;
     }
 });
