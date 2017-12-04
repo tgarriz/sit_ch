@@ -1,0 +1,15 @@
+{
+"type": "FeatureCollection",
+                                                                                
+"features": [
+{ "type": "Feature", "properties": { "nombre": "Junta Vecinal Barrio El Porteño", "color": "#2F4F4F" }, "geometry": { "type": "Point", "coordinates": [ -57.97116, -35.574263 ] } },
+{ "type": "Feature", "properties": { "nombre": "Soc de fomento Barrio Jardin", "color": "#2F4F4F" }, "geometry": { "type": "Point", "coordinates": [ -58.014401, -35.560794 ] } },
+{ "type": "Feature", "properties": { "nombre": "Soc de fomento y biblioteca Villa Lujan", "color": "#2F4F4F" }, "geometry": { "type": "Point", "coordinates": [ -58.010666, -35.565906 ] } },
+{ "type": "Feature", "properties": { "nombre": "Soc de fomento y biblioteca Barrio San Cayetano", "color": "#2F4F4F" }, "geometry": { "type": "Point", "coordinates": [ -58.017228, -35.532936 ] } },
+{ "type": "Feature", "properties": { "nombre": "Soc. de fomento El Hueco", "color": "#2F4F4F" }, "geometry": { "type": "Point", "coordinates": [ -58.000636, -35.571023 ] } },
+{ "type": "Feature", "properties": { "nombre": "Junta Vecinal Acceso Norte- Soc. de fomento", "color": "#2F4F4F" }, "geometry": { "type": "Point", "coordinates": [ -58.014682, -35.5582 ] } },
+{ "type": "Feature", "properties": { "nombre": "Junta Vecinal Barrio Iporá", "color": "#2F4F4F" }, "geometry": { "type": "Point", "coordinates": [ -58.000447, -35.567439 ] } },
+{ "type": "Feature", "properties": { "nombre": "Union Vecinal Soc. de fomento La Noria", "color": "#2F4F4F" }, "geometry": { "type": "Point", "coordinates": [ -57.99348, -35.570522 ] } },
+{ "type": "Feature", "properties": { "nombre": "Asociacion B. Fernandez Moreno y biblioteca popular", "color": "#2F4F4F" }, "geometry": { "type": "Point", "coordinates": [ -57.985732, -35.57636 ] } }
+]
+}

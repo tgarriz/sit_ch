@@ -3,16 +3,23 @@ $(document).ready(function () {
 
  function onEachFeaturebarrio(feature, layer) {
         //layer.bindPopup("Nombre: " +feature.properties.name);
-        layer.bindTooltip(feature.properties.name,{ noHide: true, direction: 'auto' });
+        layer.bindTooltip(feature.properties.nombre,{ noHide: true, direction: 'auto' });
   }
 function onEachFeatureMuni(feature, layer) {
-        layer.bindPopup("Nombre: " +feature.properties.name);
+  var popup = "Nombre: " +feature.properties.nombre;
+  var customOptions =
+  {
+    'maxWidth': '100px',
+    'width': '50px',
+    'className' : 'poppy'
+  }
+  layer.bindPopup(popup,customOptions);
  }
 
   var cargado1 = false;
   var cargado2 = false;
   var cargado3 = false;
-  
+
   /////////////////////Barrios///////////////////////////////
 
   $(".muni1").click(function () {
@@ -24,7 +31,7 @@ function onEachFeatureMuni(feature, layer) {
                    };
         },
           onEachFeature: onEachFeaturebarrio,
-        }).addTo(map);
+        }).addTo(markers);
         cargado1 = true;
     }
 });
@@ -40,7 +47,7 @@ function onEachFeatureMuni(feature, layer) {
                    };
         },
           onEachFeature: onEachFeatureMuni,
-        }).addTo(map);
+        }).addTo(markers);
         cargado2 = true;
     }
 });
@@ -62,5 +69,5 @@ function onEachFeatureMuni(feature, layer) {
 });
 /////////////////////////////////////////////////////////////
 
-    
+
 })
