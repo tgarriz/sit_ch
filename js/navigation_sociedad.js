@@ -18,7 +18,7 @@ function onEachFeaturesociedad(feature, layer) {
     popupAnchor:  [1, -24],
     iconUrl: './iconos/0-n.png'
     });
-  
+
     return L.marker(latlng, {icon: smallIcon});
   }
 
@@ -29,6 +29,7 @@ function onEachFeaturesociedad(feature, layer) {
   var cargado5 = false;
   var cargado6 = false;
   var cargado7 = false;
+  var cargado8 = false;
 
   /////////////////////clubes///////////////////////////////
 
@@ -65,7 +66,7 @@ function onEachFeaturesociedad(feature, layer) {
     popupAnchor:  [1, -24],
     iconUrl: './iconos/2-n.png'
     });
-  
+
     return L.marker(latlng, {icon: smallIcon});
   }
 
@@ -90,7 +91,7 @@ function onEachFeaturesociedad(feature, layer) {
     popupAnchor:  [1, -24],
     iconUrl: './iconos/3-n.png'
     });
-  
+
     return L.marker(latlng, {icon: smallIcon});
   }
 
@@ -106,8 +107,8 @@ function onEachFeaturesociedad(feature, layer) {
  });
 /////////////////////////////////////////////////////
 ////////////////////C. JUBILADOS/////////////////////////
-	$(".sociedad4").click(function () {
-        if ( ! cargado4 ) {
+	$(".sociedad7").click(function () {
+        if ( ! cargado7 ) {
             function icono_cjubilados(feature, latlng) {
     var smallIcon = L.icon({
     iconSize: [35, 35],
@@ -115,7 +116,7 @@ function onEachFeaturesociedad(feature, layer) {
     popupAnchor:  [1, -24],
     iconUrl: './iconos/7-n.png'
     });
-  
+
     return L.marker(latlng, {icon: smallIcon});
   }
 
@@ -126,13 +127,13 @@ function onEachFeaturesociedad(feature, layer) {
         return (feature.properties.org=="CJ") ? true:false;
     }
   }).addTo(markers);
-        cargado4 = true;
+        cargado7 = true;
     }
   });
 ///////////////////////////////////////////////////
 ////////////////////SINDICATOS/////////////////////////
- $(".sociedad5").click(function () {
-    if ( ! cargado5 ) {
+ $(".sociedad4").click(function () {
+    if ( ! cargado4 ) {
         function icono_sindicato(feature, latlng) {
     var smallIcon = L.icon({
     iconSize: [35, 35],
@@ -140,7 +141,7 @@ function onEachFeaturesociedad(feature, layer) {
     popupAnchor:  [1, -24],
     iconUrl: './iconos/4-n.png'
     });
-  
+
     return L.marker(latlng, {icon: smallIcon});
   }
 
@@ -151,13 +152,13 @@ function onEachFeaturesociedad(feature, layer) {
         return (feature.properties.org=="SI") ? true:false;
     }
   }).addTo(markers);
-        cargado5 = true;
+        cargado4 = true;
     }
   });
 ///////////////////////////////////////////////////
 ////////////////////C. EMPRESARIALES/////////////////////////
- $(".sociedad6").click(function () {
-    if ( ! cargado6 ) {
+ $(".sociedad5").click(function () {
+    if ( ! cargado5 ) {
         function icono_cempresarial(feature, latlng) {
     var smallIcon = L.icon({
     iconSize: [35, 35],
@@ -165,7 +166,7 @@ function onEachFeaturesociedad(feature, layer) {
     popupAnchor:  [1, -24],
     iconUrl: './iconos/5-n.png'
     });
-  
+
     return L.marker(latlng, {icon: smallIcon});
   }
 
@@ -176,13 +177,13 @@ function onEachFeaturesociedad(feature, layer) {
         return (feature.properties.org=="CE") ? true:false;
     }
   }).addTo(markers);
-        cargado6 = true;
+        cargado5 = true;
     }
  })
 ///////////////////////////////////////////////////
 ////////////////////ONGs/////////////////////////
- $(".sociedad7").click(function () {
-    if ( ! cargado7 ) {
+ $(".sociedad6").click(function () {
+    if ( ! cargado6 ) {
         function icono_socong(feature, latlng) {
     var smallIcon = L.icon({
     iconSize: [35, 35],
@@ -190,7 +191,7 @@ function onEachFeaturesociedad(feature, layer) {
     popupAnchor:  [1, -24],
     iconUrl: './iconos/6-n.png'
     });
-  
+
     return L.marker(latlng, {icon: smallIcon});
   }
 
@@ -201,7 +202,29 @@ function onEachFeaturesociedad(feature, layer) {
         return (feature.properties.org=="ON") ? true:false;
     }
   }).addTo(markers);
-        cargado7 = true;
+        cargado6 = true;
     }
  })
+ ////////////////////EMPRESAS/////////////////////////
+  $(".sociedad8").click(function () {
+     if ( ! cargado8 ) {
+         function icono_empresas(feature, latlng) {
+     var smallIcon = L.icon({
+     iconSize: [35, 35],
+     iconAnchor: [13, 27],
+     popupAnchor:  [1, -24],
+     iconUrl: './iconos/8-n.png'
+     });
+
+     return L.marker(latlng, {icon: smallIcon});
+   }
+
+   var layercempresas =  L.geoJson(empresas, {
+     onEachFeature: onEachFeaturesociedad,
+     pointToLayer: icono_empresas
+   }).addTo(markers);
+         cargado8 = true;
+     }
+  })
+///////////////////////////////////////////////////
 })
