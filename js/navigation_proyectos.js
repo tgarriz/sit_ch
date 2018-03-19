@@ -1,8 +1,11 @@
 $(document).ready(function () {
     // funcion para mostrar el nombre de los datos puntuales
  function onEachFeatureproyectos(feature, layer) {
-      //layer.bindPopup("NOMBRE: " +feature.properties.nombre+'<br>'+"Responsable: " +feature.properties.presidente+'<br>'+"TELEFONO: " +feature.properties.telefono +'<br>' +"PAGINA: " +'<a target=\"_blank\" href=\"'+feature.properties.pagina+'\">Link</a>');
-      var popup = "NOMBRE: " +feature.properties.nombre+'<br>'+"Responsables: " +feature.properties.responsabl+'<br>'+"Descripcion: " +feature.properties.descripcio+'<br>'+"mail: " +feature.properties.mail;
+      var popup='';
+      if (feature.properties.nombre) {popup+="NOMBRE: " +feature.properties.nombre+'<br>'};
+      if (feature.properties.responsabl) {popup+="Responsables: " +feature.properties.responsabl+'<br>'};
+      if (feature.properties.descripcio) {popup+="Descripcion: " +feature.properties.descripcio+'<br>'};
+      if (feature.properties.mail) {popup+="mail: " +feature.properties.mail};
       var customOptions =
       {
         'maxWidth': '100px',
