@@ -1,7 +1,12 @@
 $(document).ready(function () {
     // funcion para mostrar el nombre de los datos puntuales
 function onEachFeaturesociedad(feature, layer) {
-        popup = "NOMBRE: " +feature.properties.nombre+'<br>'+"Responsable: " +feature.properties.presidente+'<br>'+"TELEFONO: " +feature.properties.telefono +'<br>' +"PAGINA: " +'<a target=\"_blank\" href=\"'+feature.properties.pagina+'\">Link</a>';
+        var popup='';
+        if (feature.properties.nombre) {popup+="NOMBRE: " +feature.properties.nombre+'<br>'};
+        if (feature.properties.presidente) {popup+="Responsable: " +feature.properties.presidente+'<br>'};
+        if (feature.properties.telefono) {popup+="TELEFONO: " +feature.properties.telefono+'<br>'};
+        if (feature.properties.pagina) {popup+="PAGINA: " +'<a target=\"_blank\" href=\"'+feature.properties.pagina+'\">Link</a>'};
+        //popup = "NOMBRE: " +feature.properties.nombre+'<br>'+"Responsable: " +feature.properties.presidente+'<br>'+"TELEFONO: " +feature.properties.telefono +'<br>' +"PAGINA: " +'<a target=\"_blank\" href=\"'+feature.properties.pagina+'\">Link</a>';
         var customOptions =
         {
           'maxWidth': '100px',

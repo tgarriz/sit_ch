@@ -1,7 +1,10 @@
 $(document).ready(function () {
     // funcion para mostrar el nombre de los datos puntuales
  function onEachFeaturesalud(feature, layer) {
-        var popup = feature.properties.nombre+'<br>'+feature.properties.direccion+'<br>'+feature.properties.telefono ;
+        var popup ='';
+        if (feature.properties.nombre) {popup+=feature.properties.nombre+'<br>'};
+        if (feature.properties.direccion) {popup+=feature.properties.direccion+'<br>'};
+        if (feature.properties.telefono) {popup+=+feature.properties.telefono};
         var customOptions =
       {
         'maxWidth': '100px',
@@ -10,7 +13,7 @@ $(document).ready(function () {
       }
       layer.bindPopup(popup,customOptions);
   }
-  
+
 ///////////Farmacias //////////////////////////////////////
   function icono_farmacias(feature, latlng) {
   var smallIcon = L.icon({
@@ -22,7 +25,7 @@ $(document).ready(function () {
 
     return L.marker(latlng, {icon: smallIcon});
   }
-  
+
   var cargado1 = false;
   var cargado2 = false;
   var cargado3 = false;
@@ -43,7 +46,7 @@ $(document).ready(function () {
 
     return L.marker(latlng, {icon: smallIcon});
   }
-  
+
   var layerfarmacias =  L.geoJson(salud, {
     onEachFeature: onEachFeaturesalud,
   pointToLayer: icono_farmacias,
@@ -69,7 +72,7 @@ $(document).ready(function () {
 
     return L.marker(latlng, {icon: smallIcon});
   }
-  
+
   var layerCAP =  L.geoJson(salud, {
     onEachFeature: onEachFeaturesalud,
   pointToLayer: icono_CAP,
@@ -94,7 +97,7 @@ $(document).ready(function () {
 
     return L.marker(latlng, {icon: smallIcon});
   }
-  
+
   var layerhogarancianos =  L.geoJson(salud, {
     onEachFeature: onEachFeaturesalud,
   pointToLayer: icono_hogarancianos,
@@ -119,7 +122,7 @@ $(document).ready(function () {
 
     return L.marker(latlng, {icon: smallIcon});
   }
-  
+
   var layerhospital =  L.geoJson(salud, {
     onEachFeature: onEachFeaturesalud,
   pointToLayer: icono_hospital,
@@ -144,7 +147,7 @@ $(document).ready(function () {
 
     return L.marker(latlng, {icon: smallIcon});
   }
-  
+
   var layerclinica =  L.geoJson(salud, {
     onEachFeature: onEachFeaturesalud,
   pointToLayer: icono_clinica,
