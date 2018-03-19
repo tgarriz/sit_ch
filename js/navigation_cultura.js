@@ -1,8 +1,12 @@
 $(document).ready(function () {
     // funcion para mostrar el nombre de los datos puntuales
  function onEachFeaturecultura(feature, layer) {
-      //layer.bindPopup("NOMBRE: " +feature.properties.nombre+'<br>'+"Responsable: " +feature.properties.presidente+'<br>'+"TELEFONO: " +feature.properties.telefono +'<br>' +"PAGINA: " +'<a target=\"_blank\" href=\"'+feature.properties.pagina+'\">Link</a>');
-      var popup = "NOMBRE: " +feature.properties.nombre+'<br>'+"Responsable: " +feature.properties.presidente+'<br>'+"TELEFONO: " +feature.properties.telefono +'<br>' +"PAGINA: " +'<a target=\"_blank\" href=\"'+feature.properties.pagina+'\">Link</a>';
+      var popup='';
+      if (feature.properties.nombre) {popup+="NOMBRE: " +feature.properties.nombre+'<br>'};
+      if (feature.properties.presidente) {popup+="Responsable: " +feature.properties.presidente+'<br>'};
+      if (feature.properties.telefono) {popup+="TELEFONO: " +feature.properties.telefono +'<br>'};
+      if (feature.properties.pagina) {popup+='<a target=\"_blank\" href=\"'+feature.properties.pagina+'\">Link</a>'};
+      //var popup = "NOMBRE: " +feature.properties.nombre+'<br>'+"Responsable: " +feature.properties.presidente+'<br>'+"TELEFONO: " +feature.properties.telefono +'<br>' +"PAGINA: " +'<a target=\"_blank\" href=\"'+feature.properties.pagina+'\">Link</a>';
       var customOptions =
       {
         'maxWidth': '100px',
@@ -10,7 +14,7 @@ $(document).ready(function () {
         'className' : 'poppy'
       }
       layer.bindPopup(popup,customOptions);
-        
+
   }
 
   function icono_cultura(feature, latlng) {
@@ -20,16 +24,17 @@ $(document).ready(function () {
   popupAnchor:  [1, -24],
   iconUrl: './iconos/0-c.png'
     });
-  
+
     return L.marker(latlng, {icon: smallIcon});
   }
-  
+
   var cargado1 = false;
   var cargado2 = false;
   var cargado3 = false;
   var cargado4 = false;
   var cargado5 = false;
   var cargado6 = false;
+  var cargado7 = false;
 
   /////////////////////Bibliotecas///////////////////////////////
 
@@ -42,7 +47,7 @@ $(document).ready(function () {
   popupAnchor:  [1, -24],
   iconUrl: './iconos/1-c.png'
     });
-  
+
     return L.marker(latlng, {icon: smallIcon});
   }
 
@@ -68,7 +73,7 @@ $(document).ready(function () {
   popupAnchor:  [1, -24],
   iconUrl: './iconos/2-c.png'
     });
-  
+
     return L.marker(latlng, {icon: smallIcon});
   }
 
@@ -93,7 +98,7 @@ $(document).ready(function () {
   popupAnchor:  [1, -24],
   iconUrl: './iconos/3-c.png'
     });
-  
+
     return L.marker(latlng, {icon: smallIcon});
   }
 
@@ -118,7 +123,7 @@ $(document).ready(function () {
   popupAnchor:  [1, -24],
   iconUrl: './iconos/4-c.png'
     });
-  
+
     return L.marker(latlng, {icon: smallIcon});
   }
 
@@ -143,7 +148,7 @@ $(document).ready(function () {
   popupAnchor:  [1, -24],
   iconUrl: './iconos/5-c.png'
     });
-  
+
     return L.marker(latlng, {icon: smallIcon});
   }
 
@@ -160,7 +165,7 @@ $(document).ready(function () {
 ///////////////////////////////////////////////////
 //////////Medios de Comunicacion///////////////////
  $(".cultura6").click(function () {
-    if ( ! cargado5 ) {
+    if ( ! cargado6 ) {
        function icono_mcomunicacion(feature, latlng) {
   var smallIcon = L.icon({
   iconSize: [35, 35],
@@ -168,7 +173,7 @@ $(document).ready(function () {
   popupAnchor:  [1, -24],
   iconUrl: './iconos/6-c.png'
     });
-  
+
     return L.marker(latlng, {icon: smallIcon});
   }
 
@@ -179,7 +184,32 @@ $(document).ready(function () {
     return (feature.properties.org=="MC") ? true:false;
     }
   }).addTo(markers);
-        cargado5 = true;
+        cargado6 = true;
+    }
+  });
+///////////////////////////////////////////////////
+//////////Otros////////////////////////////////////
+ $(".cultura7").click(function () {
+    if ( ! cargado7 ) {
+       function icono_mcomunicacion(feature, latlng) {
+  var smallIcon = L.icon({
+  iconSize: [35, 35],
+  iconAnchor: [13, 27],
+  popupAnchor:  [1, -24],
+  iconUrl: './iconos/7-c.png'
+    });
+
+    return L.marker(latlng, {icon: smallIcon});
+  }
+
+  var layermcomunicacion =  L.geoJson(cultura, {
+    onEachFeature: onEachFeaturecultura,
+  pointToLayer: icono_mcomunicacion,
+  filter: function(feature, layer) {
+    return (feature.properties.org=="OT") ? true:false;
+    }
+  }).addTo(markers);
+        cargado7 = true;
     }
   });
 ///////////////////////////////////////////////////

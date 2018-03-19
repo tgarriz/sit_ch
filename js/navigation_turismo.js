@@ -2,7 +2,12 @@ $(document).ready(function () {
     // funcion para mostrar el nombre de los datos puntuales
  function onEachFeatureturismo(feature, layer) {
         //layer.bindPopup(feature.properties.nombre+'<br>'+feature.properties.descripcion+'<br>'+feature.properties.telefono +'<br>' +'<a target=\"_blank\" href=\"'+feature.properties.pagina+'\">Link</a>');
-        popup = feature.properties.nombre+'<br>'+feature.properties.descripcion+'<br>'+feature.properties.telefono +'<br>' +'<a target=\"_blank\" href=\"'+feature.properties.pagina+'\">Link</a>';
+        popup = '';
+        if ( feature.properties.nombre ) {popup = popup + feature.properties.nombre +'<br>'};
+        if ( feature.properties.descripcio ) {popup = popup + feature.properties.descripcio +'<br>'};
+        if ( feature.properties.tel ) {popup = popup + feature.properties.tel +'<br>'};
+        if ( feature.properties.mail ) {popup = popup + feature.properties.mail +'<br>'};
+        if ( feature.properties.web ) {popup = popup + '<a target=\"_blank\" href=\"'+feature.properties.web+'\">Link</a>'};
         var customOptions =
       {
         'maxWidth': '100px',
@@ -19,7 +24,7 @@ $(document).ready(function () {
   popupAnchor:  [1, -24],
   iconUrl: './iconos/0-v.png'
     });
-  
+
     return L.marker(latlng, {icon: smallIcon});
   }
 
@@ -41,7 +46,7 @@ $(document).ready(function () {
   popupAnchor:  [1, -24],
   iconUrl: './iconos/1-v.png'
     });
-  
+
     return L.marker(latlng, {icon: smallIcon});
   }
 
@@ -67,7 +72,7 @@ $(document).ready(function () {
   popupAnchor:  [1, -24],
   iconUrl: './iconos/2-v.png'
     });
-  
+
     return L.marker(latlng, {icon: smallIcon});
   }
 
@@ -92,7 +97,7 @@ $(document).ready(function () {
   popupAnchor:  [1, -24],
   iconUrl: './iconos/3-v.png'
     });
-  
+
     return L.marker(latlng, {icon: smallIcon});
   }
 
@@ -117,7 +122,7 @@ $(document).ready(function () {
   popupAnchor:  [1, -24],
   iconUrl: './iconos/4-v.png'
     });
-  
+
     return L.marker(latlng, {icon: smallIcon});
   }
 
@@ -142,7 +147,7 @@ $(document).ready(function () {
   popupAnchor:  [1, -24],
   iconUrl: './iconos/5-v.png'
     });
-  
+
     return L.marker(latlng, {icon: smallIcon});
   }
 
@@ -167,7 +172,7 @@ $(document).ready(function () {
   popupAnchor:  [1, -24],
   iconUrl: './iconos/6-v.png'
     });
-  
+
     return L.marker(latlng, {icon: smallIcon});
   }
 

@@ -2,7 +2,11 @@ $(document).ready(function () {
     // funcion para mostrar el nombre de los datos puntuales
  var layerlist={};
   function onEachFeatureescuela(feature, layer) {
-        var popup = feature.properties.nombre+'<br>'+feature.properties.descripcio+'<br>'+feature.properties.calle+' '+feature.properties.nro;
+        var popup = '';
+        if ( feature.properties.nombre ) {popup+=feature.properties.nombre+'<br>'};
+        if ( feature.properties.descripcio ) {popup+=feature.properties.descripcio+'<br>'};
+        if ( feature.properties.calle ) {popup+=feature.properties.calle+' '+feature.properties.nro};
+        //var popup = feature.properties.nombre+'<br>'+feature.properties.descripcio+'<br>'+feature.properties.calle+' '+feature.properties.nro;
         var customOptions =
       {
         'maxWidth': '100px',
@@ -18,7 +22,7 @@ $(document).ready(function () {
     popupAnchor:  [1, -24],
     iconUrl: './iconos/0-a.png'
     });
-  
+
     return L.marker(latlng, {icon: smallIcon});
   }
   var cargado1 = false;
@@ -29,7 +33,7 @@ $(document).ready(function () {
   var cargado6 = false;
   var cargado7 = false;
   var cargado8 = false;
-  
+
   /*var layerescuelas =  L.geoJson(escuelas, {
     onEachFeature: onEachFeatureescuela,
     pointToLayer: icono_escuelas,
@@ -46,7 +50,7 @@ $(document).ready(function () {
                     popupAnchor:  [1, -24],
                     iconUrl: './iconos/1-a.png'
                 });
-  
+
             return L.marker(latlng, {icon: smallIcon});
             }
 
@@ -72,7 +76,7 @@ $(document).ready(function () {
                 popupAnchor:  [1, -24],
                 iconUrl: './iconos/2-a.png'
                 });
-  
+
             return L.marker(latlng, {icon: smallIcon});
             }
 
@@ -97,7 +101,7 @@ $(document).ready(function () {
                     popupAnchor:  [1, -24],
                     iconUrl: './iconos/3-a.png'
                 });
-  
+
                 return L.marker(latlng, {icon: smallIcon});
             }
 
@@ -145,7 +149,7 @@ $(document).ready(function () {
             popupAnchor:  [1, -24],
             iconUrl: './iconos/5-a.png'
         });
-  
+
         return L.marker(latlng, {icon: smallIcon});
         }
 
@@ -193,8 +197,8 @@ $(document).ready(function () {
 	           iconAnchor: [13, 27],
 	           popupAnchor:  [1, -24],
 	           iconUrl: './iconos/7-a.png'
-            }); 
-  
+            });
+
             return L.marker(latlng, {icon: smallIcon});
         }
         var layercomplementaria =  L.geoJson(escuelas, {
